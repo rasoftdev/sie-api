@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('person_has_hours', function (Blueprint $table) {
-            $table->foreignId('person_id')->nullable()->constrained('persons')->onDelete('set null');
+            $table->foreignId('person_id')->nullable()->constrained('persons')->onDelete('cascade');
             $table->integer('max_hour')->nullable();
             $table->timestamps();
         });

@@ -12,8 +12,8 @@ return new class extends Migration {
     {
         Schema::create('contents', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('curriculum_id')->nullable()->constrained('curriculums')->onDelete('set null');
-            $table->foreignId('academic_period_id')->nullable()->constrained('academic_periods')->onDelete('set null');
+            $table->foreignId('curriculum_id')->constrained('curriculums')->onDelete('cascade');
+            $table->foreignId('academic_period_id')->constrained('academic_periods')->onDelete('cascade');
             $table->longText('content')->nullable();
             $table->timestamps();
             $table->softDeletes();

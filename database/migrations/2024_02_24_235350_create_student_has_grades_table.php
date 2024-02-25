@@ -12,8 +12,8 @@ return new class extends Migration {
     {
         Schema::create('student_has_grades', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('student_id')->nullable()->constrained('persons')->onDelete('set null');
-            $table->foreignId('grade_id')->nullable()->constrained('grades')->onDelete('set null');
+            $table->foreignId('student_id')->nullable()->constrained('persons')->onDelete('cascade');
+            $table->foreignId('grade_id')->nullable()->constrained('grades')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });

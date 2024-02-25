@@ -13,10 +13,10 @@ return new class extends Migration {
         Schema::create('assistances', function (Blueprint $table) {
             $table->id();
             $table->id();
-            $table->foreignId('student_id')->nullable()->constrained('persons')->onDelete('set null');
-            $table->foreignId('person_id')->nullable()->constrained('persons')->onDelete('set null');
-            $table->foreignId('school_subjet_id')->nullable()->constrained('school_subjects')->onDelete('set null');
-            $table->foreignId('academic_period_id')->nullable()->constrained('academic_periods')->onDelete('set null');
+            $table->foreignId('student_id')->nullable()->constrained('persons')->onDelete('cascade');
+            $table->foreignId('person_id')->nullable()->constrained('persons')->onDelete('cascade');
+            $table->foreignId('school_subjet_id')->nullable()->constrained('school_subjects')->onDelete('cascade');
+            $table->foreignId('academic_period_id')->nullable()->constrained('academic_periods')->onDelete('cascade');
             $table->integer('hour')->nullable();
             $table->char('date', 4)->nullable();
             $table->tinyInteger('in_class')->nullable();

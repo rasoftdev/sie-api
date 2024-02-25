@@ -12,8 +12,8 @@ return new class extends Migration {
     {
         Schema::create('locations', function (Blueprint $table) {
                $table->id();
-            $table->foreignId('person_id')->nullable()->constrained('persons')->onDelete('set null');
-            $table->foreignId('municipality_id')->nullable()->constrained('municipalities')->onDelete('set null');
+            $table->foreignId('person_id')->nullable()->constrained('persons')->onDelete('cascade');
+            $table->foreignId('municipality_id')->nullable()->constrained('municipalities')->onDelete('cascade');
             $table->string('location_type', 255)->nullable();
             $table->timestamps();
             $table->softDeletes();

@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('code', 10)->nullable();
             $table->string('name', 100)->nullable();
-            $table->foreignId('grade_id')->nullable()->constrained('grades')->onDelete('set null');
+            $table->foreignId('grade_id')->nullable()->constrained('grades')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });
