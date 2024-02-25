@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('student_registers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('student_id')->nullable()->constrained('persons')->onDelete('set null');
+            $table->tinyInteger('state')->nullable();
+            $table->char('year', 4)->nullable();
             $table->timestamps();
         });
     }

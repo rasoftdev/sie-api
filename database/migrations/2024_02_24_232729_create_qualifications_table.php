@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('qualifications', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('task_id')->nullable()->constrained('tasks')->onDelete('set null');
+            $table->foreignId('student_id')->nullable()->constrained('persons')->onDelete('set null');
+            $table->date('delivery_date')->nullable();
+            $table->float('value')->nullable();
+            $table->foreignId('academic_period_id')->nullable()->constrained('academic_periods')->onDelete('set null');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

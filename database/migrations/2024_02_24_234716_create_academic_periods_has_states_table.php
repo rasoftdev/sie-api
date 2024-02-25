@@ -10,11 +10,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('contents', function (Blueprint $table) {
+        Schema::create('academic_periods_has_states', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('curriculum_id')->constrained('curriculums')->onDelete('set null');
-            $table->foreignId('academic_period_id')->constrained('academic_periods')->onDelete('set null');
-            $table->longText('content')->nullable();
+            $table->foreignId('academic_period_id')->constrained()->onDelete('cascade');
+            $table->tinyInteger('state')->nullable();
+            $table->char('year', 4)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -25,6 +25,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('contents');
+        Schema::dropIfExists('academic_periods_has_states');
     }
 };

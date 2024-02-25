@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,7 +12,13 @@ return new class extends Migration
     {
         Schema::create('school_calendar_days', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('school_calendar_id')->nullable()->constrained('school_calendars')->onDelete('set null');
+            $table->foreignId('school_subjet_id')->nullable()->constrained('school_subjects')->onDelete('set null');
+            $table->foreignId('person_id')->nullable()->constrained('persons')->onDelete('set null');
+            $table->string('day', 10)->nullable();
+            $table->integer('hour')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('student_has_parents', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('student_id')->nullable()->constrained('persons')->onDelete('set null');
+            $table->foreignId('parent_id')->nullable()->constrained('persons')->onDelete('set null');
+            $table->string('kinship', 100)->nullable();
+            $table->tinyInteger('is_attendant')->nullable();
         });
     }
 

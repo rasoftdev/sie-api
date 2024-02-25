@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('states', function (Blueprint $table) {
             $table->id();
+            $table->string('code', 10)->nullable();
+            $table->string('name', 120)->nullable();
             $table->timestamps();
+              $table->softDeletes();
         });
     }
 
