@@ -11,6 +11,7 @@ class Person extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'persons';
+
     protected $fillable = [
         'user_id', 'document_type', 'document_number', 'document_issuance', 'document_issue_date', 'first_name', 'second_name', 'first_surname', 'second_surname', 'birthday', 'rh', 'gender', 'address', 'neighborhood', 'main_phone', 'other_phone', 'stratum', 'sisben', 'eps', 'occupation', 'state',
     ];
