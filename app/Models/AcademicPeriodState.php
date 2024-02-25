@@ -7,5 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class AcademicPeriodState extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+    protected $table = 'academic_period_has_states';
+    protected $fillable = [
+        'academic_period_id', 'state', 'year',
+    ];
+
+    protected $dates = ['deleted_at'];
+
+    public function academicPeriod()
+    {
+        return $this->belongsTo(AcademicPeriod::class);
+    }
 }

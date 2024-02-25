@@ -7,5 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class StudentHasParent extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+
+    protected $table = 'student_has_parents';
+
+    protected $fillable = [
+        'student_id', 'parent_id', 'kinship', 'is_attendant',
+    ];
+
+    protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+
+    public function student()
+    {
+        return $this->belongsTo(Person::class, 'student_id');
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(Person::class, 'parent_id');
+    }
 }
