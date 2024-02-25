@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "178c0d3f26ad56136eb7496d6d5f36ad",
+    "content-hash": "90708f306bfbd98394ece7e47a81d831",
     "packages": [
         {
             "name": "brick/math",
@@ -2442,6 +2442,69 @@
                 "source": "https://github.com/MarkBaker/PHPMatrix/tree/3.0.1"
             },
             "time": "2022-12-02T22:17:43+00:00"
+        },
+        {
+            "name": "milwad/laravel-attributes",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/milwad-dev/laravel-attributes.git",
+                "reference": "ed979eb4d09385de9d91b73e014ccdd3e9758205"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/milwad-dev/laravel-attributes/zipball/ed979eb4d09385de9d91b73e014ccdd3e9758205",
+                "reference": "ed979eb4d09385de9d91b73e014ccdd3e9758205",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "9.*|10.*",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^7.0 || ^8.0",
+                "pestphp/pest": "^1.0",
+                "pestphp/pest-plugin-laravel": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Milwad\\LaravelAttributes\\LaravelAttributesServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Milwad\\LaravelAttributes\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "milwad khosravi",
+                    "email": "milwad.dev@gmail.com",
+                    "homepage": "https://milwad.ir",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Make attributes easy",
+            "keywords": [
+                "easy attributes",
+                "laravel",
+                "laravel attributes package",
+                "laravel-attributes",
+                "milwad",
+                "milwad-dev"
+            ],
+            "support": {
+                "issues": "https://github.com/milwad-dev/laravel-attributes/issues",
+                "source": "https://github.com/milwad-dev/laravel-attributes/tree/v1.0"
+            },
+            "time": "2023-04-07T11:16:20+00:00"
         },
         {
             "name": "monolog/monolog",
