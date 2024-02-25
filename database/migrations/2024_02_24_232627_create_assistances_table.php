@@ -12,7 +12,6 @@ return new class extends Migration {
     {
         Schema::create('assistances', function (Blueprint $table) {
             $table->id();
-            $table->id();
             $table->foreignId('student_id')->constrained('persons')->onDelete('cascade');
             $table->foreignId('person_id')->constrained('persons')->onDelete('cascade');
             $table->foreignId('school_subjet_id')->constrained('school_subjects')->onDelete('cascade');
