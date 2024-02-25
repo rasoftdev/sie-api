@@ -12,9 +12,9 @@ return new class extends Migration {
     {
         Schema::create('school_calendar_days', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('school_calendar_id')->nullable()->constrained('school_calendars')->onDelete('cascade');
-            $table->foreignId('school_subjet_id')->nullable()->constrained('school_subjects')->onDelete('cascade');
-            $table->foreignId('person_id')->nullable()->constrained('persons')->onDelete('cascade');
+            $table->foreignId('school_calendar_id')->constrained('school_calendars')->onDelete('cascade');
+            $table->foreignId('school_subjet_id')->constrained('school_subjects')->onDelete('cascade');
+            $table->foreignId('person_id')->constrained('persons')->onDelete('cascade');
             $table->string('day', 10)->nullable();
             $table->integer('hour')->nullable();
             $table->timestamps();

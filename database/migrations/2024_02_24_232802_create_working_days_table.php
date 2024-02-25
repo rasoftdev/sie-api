@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('working_days', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('person_id')->nullable()->constrained('persons')->onDelete('cascade');
+            $table->foreignId('person_id')->constrained('persons')->onDelete('cascade');
             $table->string('workday', 50)->nullable();
             $table->char('year', 4)->nullable();
             $table->timestamps();

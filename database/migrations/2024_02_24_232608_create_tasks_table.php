@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('school_subjet_id')->nullable()->constrained('school_subjects')->onDelete('cascade');
-            $table->foreignId('person_id')->nullable()->constrained('persons')->onDelete('cascade');
+            $table->foreignId('school_subjet_id')->constrained('school_subjects')->onDelete('cascade');
+            $table->foreignId('person_id')->constrained('persons')->onDelete('cascade');
             $table->string('name', 100)->nullable();
             $table->longText('content')->nullable();
             $table->string('type', 50)->nullable();
