@@ -2,94 +2,65 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
-
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register', 'refresh', 'logout']]);
+        $this->middleware('auth:api', ['except' => ['login']]);
     }
 
-    public function register(Request $request)
+    public function login()
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
-        ]);
+        $credentials = request(['email', 'password']);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        $token = Auth::guard('api')->login($user);
-        return response()->json([
-            'status' => 'success',
-            'message' => 'User created successfully',
-            'user' => $user,
-            'authorisation' => [
-                'token' => $token,
-                'type' => 'bearer',
-            ]
-        ]);
-    }
-
-    public function login(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-        ]);
-        $credentials = $request->only('email', 'password');
-
-        $token = Auth::guard('api')->attempt($credentials);
-        if (!$token) {
+        if (!$token = auth('api')->attempt($credentials)) {
             return response()->json([
-                'status' => 'error',
-                'message' => 'Unauthorized',
-            ], 401);
+                "status" => false,
+                "message" => "Invalid email or password"
+            ]);
         }
+        return $this->respondWithToken($token);
+    }
 
-        $user = Auth::guard('api')->user();
+    public function me()
+    {
+        $user = auth('api')->user();
+        if (!$user) {
+            return response()->json([
+                "status" => false,
+                "message" => "User not found"
+            ]);
+        }
         return response()->json([
-            'status' => 'success',
-            'user' => $user,
-            'authorisation' => [
-                'token' => $token,
-                'type' => 'bearer',
-            ]
+            "status" => true,
+            "data" => $user
         ]);
-
     }
 
     public function logout()
     {
-        Auth::guard('api')->logout();
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Successfully logged out',
-        ]);
+        auth()->logout();
+
+        return response()->json(['mensaje' => 'Cierre de sesión exitoso']);
     }
 
+    public function refreshToken()
+    {
+        return $this->respondWithToken(auth()->refresh());
+    }
 
-    public function refresh()
+    protected function respondWithToken($token)
     {
         return response()->json([
-            'status' => 'success',
-            'user' => Auth::guard('api')->user(),
-            'authorisation' => [
-                'token' => Auth::guard('api')->refresh(),
-                'type' => 'bearer',
-            ]
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth('api')->factory()->getTTL() * 60
         ]);
     }
-
-
 }
