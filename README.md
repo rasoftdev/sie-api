@@ -81,7 +81,10 @@ Sigue estos pasos para instalar y configurar el proyecto en tu entorno local:
 7. Ejecuta el servidor de desarrollo o puedes crear un vhost personalizado para ejecutar el api:
    ```bash
     php artisan server
-
+8. Usuario Super Admin
+   ```bash
+    email: dev@ricardoalvarez.com.co
+    password: 12345678
 ## Autores
 
 - [@rasoftdev](https://www.github.com/rasoftdev)
