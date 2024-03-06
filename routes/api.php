@@ -8,7 +8,7 @@ use App\Http\Controllers\Auth\AuthController;
 Route::post("login", [AuthController::class, "login"])->name("login");
 
 Route::group([
-    "middleware" => ["auth:api"]
+    "middleware" => ["auth"]
 ], function () {
     Route::get("me", [AuthController::class, "me"])->name("me");
     Route::get("refresh", [AuthController::class, "refreshToken"])->name("refresh");

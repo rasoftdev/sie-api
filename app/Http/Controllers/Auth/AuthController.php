@@ -10,11 +10,6 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:api', ['except' => ['login']]);
-    }
-
     public function login()
     {
         $credentials = request(['email', 'password']);
@@ -30,7 +25,7 @@ class AuthController extends Controller
 
     public function me()
     {
-        $user = auth('api')->user();
+        $user = auth()->user();
         if (!$user) {
             return response()->json([
                 "status" => false,
@@ -58,9 +53,11 @@ class AuthController extends Controller
     protected function respondWithToken($token)
     {
         return response()->json([
+            'status' => true,
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth('api')->factory()->getTTL() * 60
+            'expires_in' => auth('api')->factory()->getTTL() * 60,
+            'user' => auth()->user()
         ]);
     }
 }
