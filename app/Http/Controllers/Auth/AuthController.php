@@ -76,9 +76,19 @@ class AuthController extends Controller
 
     public function logout()
     {
-        auth()->logout();
-
-        return response()->json(['mensaje' => 'Cierre de sesión exitoso']);
+        try {
+            auth()->logout();
+            return response()->json([
+                'status' => true,
+                'message' => 'Successful logout'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                "status" => false,
+                "message" => "Error logging out",
+                "error" => $e->getMessage()
+            ], 500);
+        }
     }
 
     public function refreshToken()
@@ -93,7 +103,6 @@ class AuthController extends Controller
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth('api')->factory()->getTTL() * 60,
-            'user' => auth()->user()
         ]);
     }
 }
