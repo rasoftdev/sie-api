@@ -1,0 +1,373 @@
+{
+	"info": {
+		"_postman_id": "8b99bc7d-6f6b-4bcf-9517-89b503e360a8",
+		"name": "SIE API 1.0",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8852516"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"dev@ricardoalvarez.com.co\",\r\n    \"password\":\"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vc2llLWFwaS5sb2NhbC9hcGkvbG9naW4iLCJpYXQiOjE3MTAwNDkyMjcsImV4cCI6MTcxMDA1MjgyNywibmJmIjoxNzEwMDQ5MjI3LCJqdGkiOiJ2bmZ6akZxZnBGQk1vVGFCIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjciLCJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiUmljYXJkbyBBbHZhcmV6IiwiZW1haWwiOiJkZXZAcmljYXJkb2FsdmFyZXouY29tLmNvIn19.9cv5eq3pB13Brq-8CpsUmlcwN8dpy98xKqrAvKQB5RE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"info@ricardoalvarez.com.co\",\r\n    \"password\":\"12345678\",\r\n    \"name\": \"Ricardo Alvarez Mora\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vc2llLWFwaS5sb2NhbC9hcGkvbG9naW4iLCJpYXQiOjE3MTAwNDk1NjMsImV4cCI6MTcxMDA1MzE2MywibmJmIjoxNzEwMDQ5NTYzLCJqdGkiOiIwSmxYSUwwdWFDYUVpQWdOIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjciLCJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiUmljYXJkbyBBbHZhcmV6IiwiZW1haWwiOiJkZXZAcmljYXJkb2FsdmFyZXouY29tLmNvIn19.vWcFUKvVWBH6U4bmuFfs_F65RImEsQqBAoo8b6PwgJI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/me",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refreshToken",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vc2llLWFwaS5sb2NhbC9hcGkvbG9naW4iLCJpYXQiOjE3MTAwNDk1NjMsImV4cCI6MTcxMDA1MzE2MywibmJmIjoxNzEwMDQ5NTYzLCJqdGkiOiIwSmxYSUwwdWFDYUVpQWdOIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjciLCJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiUmljYXJkbyBBbHZhcmV6IiwiZW1haWwiOiJkZXZAcmljYXJkb2FsdmFyZXouY29tLmNvIn19.vWcFUKvVWBH6U4bmuFfs_F65RImEsQqBAoo8b6PwgJI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/refresh",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "roles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vc2llLWFwaS5sb2NhbC9hcGkvbG9naW4iLCJpYXQiOjE3MTAwNTQwNjYsImV4cCI6MTcxMDA1NzY2NiwibmJmIjoxNzEwMDU0MDY2LCJqdGkiOiJ0WkludmNXR1F1Ujc0NDBXIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjciLCJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiUmljYXJkbyBBbHZhcmV6IiwiZW1haWwiOiJkZXZAcmljYXJkb2FsdmFyZXouY29tLmNvIn19.U9AI5V_MVR3IIfFWcd6Nxi5OskcSrq5CuHXlbePTo_Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/roles",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"roles"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Roles & Permissions",
+			"item": [
+				{
+					"name": "get permissions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vc2llLWFwaS5sb2NhbC9hcGkvbG9naW4iLCJpYXQiOjE3MTAwNTQwNjYsImV4cCI6MTcxMDA1NzY2NiwibmJmIjoxNzEwMDU0MDY2LCJqdGkiOiJ0WkludmNXR1F1Ujc0NDBXIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjciLCJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiUmljYXJkbyBBbHZhcmV6IiwiZW1haWwiOiJkZXZAcmljYXJkb2FsdmFyZXouY29tLmNvIn19.U9AI5V_MVR3IIfFWcd6Nxi5OskcSrq5CuHXlbePTo_Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/permissions",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"permissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get roles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vc2llLWFwaS5sb2NhbC9hcGkvbG9naW4iLCJpYXQiOjE3MTAwNTg0MzgsImV4cCI6MTcxMDA2MjAzOCwibmJmIjoxNzEwMDU4NDM4LCJqdGkiOiI1OTUwZERWRGFKaVZaUmJRIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjciLCJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiUmljYXJkbyBBbHZhcmV6IiwiZW1haWwiOiJkZXZAcmljYXJkb2FsdmFyZXouY29tLmNvIn19.1iEMja8s1Sd_eAIIeaZtuPkcu1gpBzNofR_iOrUvwDM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/roles",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "store role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vc2llLWFwaS5sb2NhbC9hcGkvbG9naW4iLCJpYXQiOjE3MTAwNTg0MzgsImV4cCI6MTcxMDA2MjAzOCwibmJmIjoxNzEwMDU4NDM4LCJqdGkiOiI1OTUwZERWRGFKaVZaUmJRIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjciLCJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiUmljYXJkbyBBbHZhcmV6IiwiZW1haWwiOiJkZXZAcmljYXJkb2FsdmFyZXouY29tLmNvIn19.1iEMja8s1Sd_eAIIeaZtuPkcu1gpBzNofR_iOrUvwDM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"test 40\",\r\n    \"permissions\":[1,2,3,4,5]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/roles",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vc2llLWFwaS5sb2NhbC9hcGkvbG9naW4iLCJpYXQiOjE3MTAwNTg0MzgsImV4cCI6MTcxMDA2MjAzOCwibmJmIjoxNzEwMDU4NDM4LCJqdGkiOiI1OTUwZERWRGFKaVZaUmJRIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjciLCJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiUmljYXJkbyBBbHZhcmV6IiwiZW1haWwiOiJkZXZAcmljYXJkb2FsdmFyZXouY29tLmNvIn19.1iEMja8s1Sd_eAIIeaZtuPkcu1gpBzNofR_iOrUvwDM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/roles/10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"roles",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vc2llLWFwaS5sb2NhbC9hcGkvbG9naW4iLCJpYXQiOjE3MTAwNTg0MzgsImV4cCI6MTcxMDA2MjAzOCwibmJmIjoxNzEwMDU4NDM4LCJqdGkiOiI1OTUwZERWRGFKaVZaUmJRIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjciLCJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiUmljYXJkbyBBbHZhcmV6IiwiZW1haWwiOiJkZXZAcmljYXJkb2FsdmFyZXouY29tLmNvIn19.1iEMja8s1Sd_eAIIeaZtuPkcu1gpBzNofR_iOrUvwDM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"test test\",\r\n    \"permissions\":[1,2,3,4]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/roles/10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"roles",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "destroy role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vc2llLWFwaS5sb2NhbC9hcGkvbG9naW4iLCJpYXQiOjE3MTAwNTg0MzgsImV4cCI6MTcxMDA2MjAzOCwibmJmIjoxNzEwMDU4NDM4LCJqdGkiOiI1OTUwZERWRGFKaVZaUmJRIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjciLCJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiUmljYXJkbyBBbHZhcmV6IiwiZW1haWwiOiJkZXZAcmljYXJkb2FsdmFyZXouY29tLmNvIn19.1iEMja8s1Sd_eAIIeaZtuPkcu1gpBzNofR_iOrUvwDM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/roles/10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"roles",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://sie-api.local/api",
+			"type": "string"
+		}
+	]
+}
