@@ -14,14 +14,21 @@ use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $roles = Role::all();
+            $page = $request->query('page', 1);
+            $perPage = $request->query('per_page', 10);
+            $roles = Role::paginate($perPage, ['*'], 'page', $page);
+
             return response()->json([
                 "status" => true,
                 "message" => "You are viewing roles",
-                "data" => RoleResource::collection($roles)
+                "data" => RoleResource::collection($roles),
+                "metadata" => [
+                    "total_registers" => $roles->total(),
+                    "pages" => $roles->lastPage()
+                ]
             ]);
         } catch (\Exception $e) {
             Log::error($e->getMessage());
