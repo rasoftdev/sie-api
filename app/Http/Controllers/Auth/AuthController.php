@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\MeResource;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -61,7 +62,7 @@ class AuthController extends Controller
 
     public function me()
     {
-        $user = auth()->user();
+        $user = new MeResource(auth()->user());
         if (!$user) {
             return response()->json([
                 "status" => false,
