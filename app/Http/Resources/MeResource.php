@@ -21,8 +21,7 @@ class MeResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'roles' => $this->roles->pluck('name')[0],
-            'permissions' => $permissions,
-            'permissionsId' => $permissions,
+            'permissions' => $permissions->pluck('name'),
         ];
     }
 }
