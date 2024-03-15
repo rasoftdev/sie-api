@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 Route::prefix('v1')->group(function () {
     Route::post("login", [AuthController::class, "login"])->name("login");
     Route::post("register", [AuthController::class, "register"])->name("register");
+    Route::post("register2", [AuthController::class, "register2"])->name("register2");
     Route::post("forgot-password", [AuthController::class, "forgotPassword"])->name("forgot-password");
     Route::post("reset-password", [AuthController::class, "resetPassword"])->name("reset-password");
 

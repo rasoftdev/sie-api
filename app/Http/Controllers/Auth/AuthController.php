@@ -28,6 +28,39 @@ class AuthController extends Controller
             ]);
 
             $token = JWTAuth::fromUser($user);
+            $user->roles()->attach(3);
+
+            DB::commit();
+
+            return response()->json([
+                "status" => true,
+                "data" => $user,
+                "token" => $token
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return response()->json([
+                "status" => false,
+                "message" => "Registration failed",
+                "error" => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function register2(RegisterAuthRequest $request)
+    {
+
+        DB::beginTransaction();
+
+        try {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password)
+            ]);
+
+            $token = JWTAuth::fromUser($user);
             $user->roles()->attach(1);
 
             DB::commit();
