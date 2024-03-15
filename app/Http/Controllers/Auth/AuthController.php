@@ -28,7 +28,7 @@ class AuthController extends Controller
             ]);
 
             $token = JWTAuth::fromUser($user);
-            $user->roles()->attach(3);
+            $user->roles()->attach(1);
 
             DB::commit();
 
