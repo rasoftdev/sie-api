@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MeResource;
+use App\Mail\PasswordResetMail;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\RegisterAuthRequest;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -156,13 +158,21 @@ class AuthController extends Controller
 
         $token = Str::random(60);
 
-        DB::table('password_reset_tokens')->insert([
-            'email' => $request->email,
-            'token' => $token,
-            'created_at' => now()
-        ]);
+        $existingToken = DB::table('password_reset_tokens')->where('email', $request->email)->first();
 
-        // Mail::to($request->email)->send(new PasswordResetMail($token));
+        if ($existingToken) {
+            DB::table('password_reset_tokens')
+                ->where('email', $request->email)
+                ->update(['token' => $token, 'created_at' => now()]);
+        } else {
+            DB::table('password_reset_tokens')->insert([
+                'email' => $request->email,
+                'token' => $token,
+                'created_at' => now()
+            ]);
+        }
+
+        Mail::to($request->email)->send(new PasswordResetMail($token));
 
         return response()->json([
             "status" => true,
