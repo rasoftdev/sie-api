@@ -14,12 +14,16 @@ use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
 {
+    public function model()
+    {
+        return app()->make(Role::class);
+    }
     public function index(Request $request)
     {
         try {
             $page = $request->query('page', 1);
             $perPage = $request->query('per_page', 10);
-            $roles = Role::paginate($perPage, ['*'], 'page', $page);
+            $roles = $this->model()->paginate($perPage, ['*'], 'page', $page);
 
             return response()->json([
                 "status" => true,
@@ -71,7 +75,7 @@ class RoleController extends Controller
     public function show($role)
     {
         try {
-            $role = Role::find($role);
+            $role = $this->model()->find($role);
             return response()->json([
                 "status" => true,
                 "message" => "You are viewing role with id: $role->id",

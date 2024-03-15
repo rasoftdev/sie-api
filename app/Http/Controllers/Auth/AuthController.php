@@ -11,6 +11,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\RegisterAuthRequest;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -55,7 +56,7 @@ class AuthController extends Controller
             return response()->json([
                 "status" => false,
                 "message" => "Invalid email or password"
-            ]);
+            ], 200);
         }
         return $this->respondWithToken($token);
     }
@@ -104,6 +105,75 @@ class AuthController extends Controller
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth('api')->factory()->getTTL() * 60,
+        ], 200);
+    }
+
+    public function forgotPassword(Request $request)
+    {
+        $request->validate(['email' => 'required|email']);
+
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
+            return response()->json([
+                "status" => false,
+                "message" => "No user found with this email address"
+            ], 404);
+        }
+
+        $token = Str::random(60);
+
+        DB::table('password_reset_tokens')->insert([
+            'email' => $request->email,
+            'token' => $token,
+            'created_at' => now()
+        ]);
+
+        // Mail::to($request->email)->send(new PasswordResetMail($token));
+
+        return response()->json([
+            "status" => true,
+            "message" => "Password reset link has been sent to your email"
+        ]);
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|confirmed'
+        ]);
+
+        $passwordReset = DB::table('password_resets')
+            ->where('token', $request->token)
+            ->where('email', $request->email)
+            ->first();
+
+        if (!$passwordReset) {
+            return response()->json([
+                "status" => false,
+                "message" => "Invalid token or email"
+            ], 400);
+        }
+
+        $user = User::where('email', $passwordReset->email)->first();
+
+        if (!$user) {
+            return response()->json([
+                "status" => false,
+                "message" => "No user found with this email address"
+            ], 404);
+        }
+
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        DB::table('password_resets')->where('email', $user->email)->delete();
+
+        return response()->json([
+            "status" => true,
+            "message" => "Password has been reset successfully"
         ]);
     }
 }

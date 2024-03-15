@@ -4,10 +4,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 
 Route::prefix('v1')->group(function () {
     Route::post("login", [AuthController::class, "login"])->name("login");
     Route::post("register", [AuthController::class, "register"])->name("register");
+    Route::post("forgot-password", [AuthController::class, "forgotPassword"])->name("forgot-password");
+    Route::post("reset-password", [AuthController::class, "resetPassword"])->name("reset-password");
 
     Route::group([
         "middleware" => ["auth"]
@@ -32,6 +35,12 @@ Route::prefix('v1')->group(function () {
         Route::get("{role}", [RoleController::class, "show"])->middleware('roleOrPermission:view_roles')->name("roles.show");
         Route::put("{role}", [RoleController::class, "update"])->middleware('roleOrPermission:edit_roles')->name("roles.update");
         Route::delete("{role}", [RoleController::class, "destroy"])->middleware('roleOrPermission:delete_roles')->name("roles.destroy");
+    });
+    Route::group([
+        "middleware" => ["auth"],
+        "prefix" => "users"
+    ], function () {
+        Route::get("/", [UserController::class, "index"])->middleware('roleOrPermission:view_users')->name("users.index");
     });
 });
 
