@@ -183,7 +183,6 @@ class AuthController extends Controller
 
     public function resetPassword(Request $request)
     {
-        var_dump($request->all());
         $request->validate([
             'token' => 'required',
             'email' => 'required|email',
