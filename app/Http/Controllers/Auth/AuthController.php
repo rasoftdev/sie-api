@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\RegisterAuthRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
+use App\Jobs\SendPasswordResetEmail;
 
 class AuthController extends Controller
 {
@@ -172,7 +173,8 @@ class AuthController extends Controller
             ]);
         }
 
-        Mail::to($request->email)->send(new PasswordResetMail($token));
+        dispatch(new SendPasswordResetEmail($request->email, $token));
+
 
         return response()->json([
             "status" => true,
@@ -182,13 +184,14 @@ class AuthController extends Controller
 
     public function resetPassword(Request $request)
     {
+        var_dump($request->all());
         $request->validate([
             'token' => 'required',
             'email' => 'required|email',
             'password' => 'required|confirmed'
         ]);
 
-        $passwordReset = DB::table('password_resets')
+        $passwordReset = DB::table('password_reset_tokens')
             ->where('token', $request->token)
             ->where('email', $request->email)
             ->first();
@@ -212,7 +215,7 @@ class AuthController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
-        DB::table('password_resets')->where('email', $user->email)->delete();
+        DB::table('password_reset_tokens')->where('email', $user->email)->delete();
 
         return response()->json([
             "status" => true,
