@@ -37,7 +37,7 @@
     <p>Si tienes problemas para hacer clic en el botón "Restablecer contraseña", copia y pega la URL a continuación en
         tu navegador web: https://https://devricardoalvarez.com.co/auth/reset-password?token={{ $token }}</p>
 
-    <p>Gracias,<br>El equipo de tu empresa</p>
+    <p>Gracias,<br>Soporte SIE APP</p>
 </div>
 </body>
 </html>
