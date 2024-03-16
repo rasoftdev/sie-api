@@ -31,11 +31,13 @@
     <p>Recibimos una solicitud para restablecer tu contraseña. Si no hiciste esta solicitud, puedes ignorar este correo
         electrónico.</p>
 
-    <a class="reset-link" href="https://devricardoalvarez.com.co/auth/reset-password?token={{ $token }}">Restablecer
+    <a class="reset-link"
+       href="https://devricardoalvarez.com.co/auth/reset-password?token={{ $token }}&email={{base64_encode($email)}}">Restablecer
         contraseña</a>
 
     <p>Si tienes problemas para hacer clic en el botón "Restablecer contraseña", copia y pega la URL a continuación en
-        tu navegador web: https://devricardoalvarez.com.co/auth/reset-password?token={{ $token }}</p>
+        tu navegador web: https://devricardoalvarez.com.co/auth/reset-password?token={{ $token }}
+        &email={{base64_encode($email)}}</p>
 
     <p>Gracias,<br>Soporte SIE APP</p>
 </div>

@@ -179,7 +179,7 @@ class AuthController extends Controller
                 ]);
             }
 
-            dispatch((new SendPasswordResetEmail($request->email, $token))->delay(now()->addMinute()));
+            dispatch((new SendPasswordResetEmail($request->email, $token))->delay(now()->addSeconds(10)));
 
             return response()->json([
                 "status" => true,

@@ -26,7 +26,7 @@ class SendPasswordResetEmail implements ShouldQueue
     public function handle()
     {
         if (filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-            Mail::to($this->email)->send(new PasswordResetMail($this->token));
+            Mail::to($this->email)->send(new PasswordResetMail($this->token, $this->email));
         }
     }
 }
