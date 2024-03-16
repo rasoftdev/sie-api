@@ -12,6 +12,9 @@
 				{
 					"name": "login",
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -36,6 +39,33 @@
 					"response": []
 				},
 				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vc2llLWFwaS5sb2NhbC9hcGkvdjEvbG9naW4iLCJpYXQiOjE3MTAxMDkwMDgsImV4cCI6MTcxMDExMjYwOCwibmJmIjoxNzEwMTA5MDA4LCJqdGkiOiJKUWFnZldFVjhBUU9nSkZNIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjciLCJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiUmljYXJkbyBBbHZhcmV6IiwiZW1haWwiOiJkZXZAcmljYXJkb2FsdmFyZXouY29tLmNvIn19.wlym5kFYi7e-2iEOY7vpJcZ6vN6BqDF3pQrCMffrbss",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/logout",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "register",
 					"request": {
 						"auth": {
@@ -52,7 +82,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"info@ricardoalvarez.com.co\",\r\n    \"password\":\"12345678\",\r\n    \"name\": \"Ricardo Alvarez Mora\"\r\n}",
+							"raw": "{\r\n    \"email\": \"melanycaicedosena@gmail.com\",\r\n    \"password\": \"1007850870\",\r\n    \"name\": \"Melany Caicedo Caicedo\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -79,7 +109,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vc2llLWFwaS5sb2NhbC9hcGkvbG9naW4iLCJpYXQiOjE3MTAwNDk1NjMsImV4cCI6MTcxMDA1MzE2MywibmJmIjoxNzEwMDQ5NTYzLCJqdGkiOiIwSmxYSUwwdWFDYUVpQWdOIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjciLCJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiUmljYXJkbyBBbHZhcmV6IiwiZW1haWwiOiJkZXZAcmljYXJkb2FsdmFyZXouY29tLmNvIn19.vWcFUKvVWBH6U4bmuFfs_F65RImEsQqBAoo8b6PwgJI",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vc2llLWFwaS5sb2NhbC9hcGkvdjEvbG9naW4iLCJpYXQiOjE3MTAzMDgyODcsImV4cCI6MTcxMDMxMTg4NywibmJmIjoxNzEwMzA4Mjg3LCJqdGkiOiI4cENMd0hKVkdVemd0M1VoIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjciLCJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiUmljYXJkbyBBbHZhcmV6IiwiZW1haWwiOiJkZXZAcmljYXJkb2FsdmFyZXouY29tLmNvIn19.Ly-RhSYWdnxBE9E9HJcOWLBPaK3Ym_8c-S5EsgSa06Q",
 									"type": "string"
 								}
 							]
@@ -126,27 +156,52 @@
 					"response": []
 				},
 				{
-					"name": "roles",
+					"name": "ForgotPassword",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vc2llLWFwaS5sb2NhbC9hcGkvbG9naW4iLCJpYXQiOjE3MTAwNTQwNjYsImV4cCI6MTcxMDA1NzY2NiwibmJmIjoxNzEwMDU0MDY2LCJqdGkiOiJ0WkludmNXR1F1Ujc0NDBXIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjciLCJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiUmljYXJkbyBBbHZhcmV6IiwiZW1haWwiOiJkZXZAcmljYXJkb2FsdmFyZXouY29tLmNvIn19.U9AI5V_MVR3IIfFWcd6Nxi5OskcSrq5CuHXlbePTo_Y",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"dev@ricardoalvarez.com.co\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{base_url}}/roles",
+							"raw": "{{base_url}}/forgot-password",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"roles"
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "resetPassword",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"dev@ricardoalvarez.com.co\",\r\n    \"password\":\"1234567890\",\r\n    \"password_confirmation\": \"1234567890\",\r\n    \"token\": \"t9jKCBi1TaGv8ZSdVc87Gia6pWZ7LGTtQ9KtQls1UFa4p18vHCVQSOiz3mX5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/reset-password",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"reset-password"
 							]
 						}
 					},
@@ -200,12 +255,22 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/roles",
+							"raw": "{{base_url}}/roles?per_page=10&page=1",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"roles"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "10"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -339,6 +404,71 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "roles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vc2llLWFwaS5sb2NhbC9hcGkvbG9naW4iLCJpYXQiOjE3MTAwNTQwNjYsImV4cCI6MTcxMDA1NzY2NiwibmJmIjoxNzEwMDU0MDY2LCJqdGkiOiJ0WkludmNXR1F1Ujc0NDBXIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjciLCJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiUmljYXJkbyBBbHZhcmV6IiwiZW1haWwiOiJkZXZAcmljYXJkb2FsdmFyZXouY29tLmNvIn19.U9AI5V_MVR3IIfFWcd6Nxi5OskcSrq5CuHXlbePTo_Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/roles",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"roles"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vc2llLWFwaS5sb2NhbC9hcGkvdjEvbG9naW4iLCJpYXQiOjE3MTA0NjgwNzcsImV4cCI6MTcxMDQ3MTY3NywibmJmIjoxNzEwNDY4MDc3LCJqdGkiOiJPQ0tMWHVxME55YVI2ZUxrIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjciLCJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiUmljYXJkbyBBbHZhcmV6IiwiZW1haWwiOiJkZXZAcmljYXJkb2FsdmFyZXouY29tLmNvIn19.qnwQs8zWLO3ZIKvtwdZurogT8EjBIdimvoM8_wW5dAA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users?page=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
@@ -366,7 +496,7 @@
 	"variable": [
 		{
 			"key": "base_url",
-			"value": "http://sie-api.local/api",
+			"value": "http://sie-api.local/api/v1",
 			"type": "string"
 		}
 	]
