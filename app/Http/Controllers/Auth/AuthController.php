@@ -18,13 +18,18 @@ use App\Jobs\SendPasswordResetEmail;
 
 class AuthController extends Controller
 {
+    public function model()
+    {
+        return app()->make(User::class);
+    }
+
     public function register(RegisterAuthRequest $request)
     {
 
         DB::beginTransaction();
 
         try {
-            $user = User::create([
+            $user = $this->model()->create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password)
@@ -57,7 +62,7 @@ class AuthController extends Controller
         DB::beginTransaction();
 
         try {
-            $user = User::create([
+            $user = $this->model()->create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password)
@@ -146,77 +151,93 @@ class AuthController extends Controller
 
     public function forgotPassword(Request $request)
     {
-        $request->validate(['email' => 'required|email']);
+        try {
+            $request->validate(['email' => 'required|email']);
 
-        $user = User::where('email', $request->email)->first();
+            $user = $this->model()->where('email', $request->email)->first();
 
-        if (!$user) {
+            if (!$user) {
+                return response()->json([
+                    "status" => false,
+                    "message" => "No user found with this email address"
+                ], 404);
+            }
+
+            $token = Str::random(60);
+
+            $existingToken = DB::table('password_reset_tokens')->where('email', $request->email)->first();
+
+            if ($existingToken) {
+                DB::table('password_reset_tokens')
+                    ->where('email', $request->email)
+                    ->update(['token' => $token, 'created_at' => now()]);
+            } else {
+                DB::table('password_reset_tokens')->insert([
+                    'email' => $request->email,
+                    'token' => $token,
+                    'created_at' => now()
+                ]);
+            }
+
+            dispatch((new SendPasswordResetEmail($request->email, $token))->delay(now()->addMinute()));
+
+            return response()->json([
+                "status" => true,
+                "message" => "Password reset link has been sent to your email"
+            ]);
+        } catch (\Exception $e) {
             return response()->json([
                 "status" => false,
-                "message" => "No user found with this email address"
-            ], 404);
+                "message" => "Error sending password reset link",
+                "error" => $e->getMessage()
+            ], 500);
         }
-
-        $token = Str::random(60);
-
-        $existingToken = DB::table('password_reset_tokens')->where('email', $request->email)->first();
-
-        if ($existingToken) {
-            DB::table('password_reset_tokens')
-                ->where('email', $request->email)
-                ->update(['token' => $token, 'created_at' => now()]);
-        } else {
-            DB::table('password_reset_tokens')->insert([
-                'email' => $request->email,
-                'token' => $token,
-                'created_at' => now()
-            ]);
-        }
-
-        dispatch((new SendPasswordResetEmail($request->email, $token))->delay(now()->addMinute()));
-
-        return response()->json([
-            "status" => true,
-            "message" => "Password reset link has been sent to your email"
-        ]);
     }
 
     public function resetPassword(Request $request)
     {
-        $request->validate([
-            'token' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|confirmed'
-        ]);
+        try {
+            $request->validate([
+                'token' => 'required',
+                'email' => 'required|email',
+                'password' => 'required|confirmed'
+            ]);
 
-        $passwordReset = DB::table('password_reset_tokens')
-            ->where('token', $request->token)
-            ->where('email', $request->email)
-            ->first();
+            $passwordReset = DB::table('password_reset_tokens')
+                ->where('token', $request->token)
+                ->where('email', $request->email)
+                ->first();
 
-        if (!$passwordReset) {
+            if (!$passwordReset) {
+                return response()->json([
+                    "status" => false,
+                    "message" => "Invalid token or email"
+                ], 400);
+            }
+
+            $user = $this->model()->where('email', $passwordReset->email)->first();
+
+            if (!$user) {
+                return response()->json([
+                    "status" => false,
+                    "message" => "No user found with this email address"
+                ], 404);
+            }
+
+            $user->update(['password' => Hash::make($request->password)]);
+
+            DB::table('password_reset_tokens')->where('email', $user->email)->delete();
+
+            return response()->json([
+                "status" => true,
+                "message" => "Password has been reset successfully"
+            ]);
+        } catch (\Exception $e) {
             return response()->json([
                 "status" => false,
-                "message" => "Invalid token or email"
-            ], 400);
+                "message" => "Error resetting password",
+                "error" => $e->getMessage()
+            ], 500);
         }
-
-        $user = User::where('email', $passwordReset->email)->first();
-
-        if (!$user) {
-            return response()->json([
-                "status" => false,
-                "message" => "No user found with this email address"
-            ], 404);
-        }
-
-        $user->update(['password' => Hash::make($request->password)]);
-
-        DB::table('password_reset_tokens')->where('email', $user->email)->delete();
-
-        return response()->json([
-            "status" => true,
-            "message" => "Password has been reset successfully"
-        ]);
     }
 }
